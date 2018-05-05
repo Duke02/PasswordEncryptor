@@ -3,15 +3,8 @@
 #include <string>
 #include <ctime>
 
-void debugString(const std::string &str) {
-	for ( auto c : str ) {
-		std::cout << (int)(c);
-	}
-	std::cout << std::endl;
-}
-
 std::string cipher(const std::string &str) {
-	int maxRange = 2;
+	int maxRange = 'z' - ' ';
 	int num = rand() % maxRange + 1;
 	std::string out = std::to_string(num);
 	std::string strCopy = str;
@@ -49,6 +42,7 @@ int main(int argc, char ** argv) {
 		std::cin >> password;
 		cipheredPassword = cipher(password);
 	} else {
+		std::cout << "If you haven't deleted the file before running this, Ctl-C right now and do it!" << std::endl;
 		passwordFile >> password;
 		cipheredPassword = decipher(password);
 	}
