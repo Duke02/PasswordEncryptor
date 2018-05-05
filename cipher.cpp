@@ -3,6 +3,13 @@
 #include <string>
 #include <ctime>
 
+void debugStr(const std::string &str) {
+	for ( auto c : str ) {
+		std::cout << (int)(c);
+	}
+	std::cout << std::endl;
+}
+
 std::string cipher(const std::string &str, const bool &toEncrypt) {
 	int num;
 	int maxRange = 10;
@@ -25,6 +32,11 @@ std::string cipher(const std::string &str, const bool &toEncrypt) {
 		out += c + num;
 	}
 	return out;
+}
+
+bool testCipher(const std::string &password, const bool &toEncrypt) {
+	std::string ciphered = cipher(password, toEncrypt);
+	return password == cipher(ciphered, !toEncrypt);
 }
 
 int main(int argc, char ** argv) {
@@ -54,6 +66,11 @@ int main(int argc, char ** argv) {
 		passwordFileO.close();
 	} else {
 		std::cout << "Your password is: " << cipheredPassword << std::endl;
+	}
+	if(testCipher(password, toEncrypt)) {
+		std::cout << "This password is correct!" << std::endl;
+	} else {
+		std::cout << "This password is wrong!" << std::endl;
 	}
 	return 0;
 }
