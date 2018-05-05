@@ -3,40 +3,32 @@
 #include <string>
 #include <ctime>
 
-void debugStr(const std::string &str) {
+void debugString(const std::string &str) {
 	for ( auto c : str ) {
 		std::cout << (int)(c);
 	}
 	std::cout << std::endl;
 }
 
-std::string cipher(const std::string &str, const bool &toEncrypt) {
-	int num;
-	int maxRange = 10;
-	if(toEncrypt) {
-		do {
-			num = rand() % maxRange;
-		} while ( num == 0 );
-	}
-	if ( !toEncrypt ) {
-		num = -str[ 0 ];
-	}
-	std::string out = std::to_string( num );
-	std::string strCopy;
-	if(!toEncrypt) {
-		strCopy = str.substr(1);
-	} else {
-		strCopy = str;
-	}
+std::string cipher(const std::string &str) {
+	int maxRange = 2;
+	int num = rand() % maxRange + 1;
+	std::string out = std::to_string(num);
+	std::string strCopy = str;
 	for ( auto c : strCopy ) {
 		out += c + num;
 	}
 	return out;
 }
 
-bool testCipher(const std::string &password, const bool &toEncrypt) {
-	std::string ciphered = cipher(password, toEncrypt);
-	return password == cipher(ciphered, !toEncrypt);
+std::string decipher(const std::string& cipheredPassword) {
+	int num = cipheredPassword[0];
+	std::string strCopy = cipheredPassword.substr(1);
+	std::string out;
+	for ( auto c : strCopy ) {
+		out += c - num;
+	}
+	return out;
 }
 
 int main(int argc, char ** argv) {
@@ -51,13 +43,16 @@ int main(int argc, char ** argv) {
 	std::cin >> encrypt;
 	bool toEncrypt = tolower(encrypt) == 'y';
 	std::string password;
+	std::string cipheredPassword;
 	if(toEncrypt) {
 		std::cout << "Pass in the password for the application." << std::endl;
 		std::cin >> password;
+		cipheredPassword = cipher(password);
 	} else {
 		passwordFile >> password;
+		cipheredPassword = decipher(password);
 	}
-	std::string cipheredPassword = cipher(password, toEncrypt);
+
 	passwordFile.close();
 	if(toEncrypt) {
 		std::ofstream passwordFileO;
@@ -66,11 +61,6 @@ int main(int argc, char ** argv) {
 		passwordFileO.close();
 	} else {
 		std::cout << "Your password is: " << cipheredPassword << std::endl;
-	}
-	if(testCipher(password, toEncrypt)) {
-		std::cout << "This password is correct!" << std::endl;
-	} else {
-		std::cout << "This password is wrong!" << std::endl;
 	}
 	return 0;
 }
