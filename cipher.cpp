@@ -4,22 +4,12 @@
 #include <ctime>
 #include <cmath>
 
-#define DEBUG 1
-
-void debug(const std::string &message) {
-	if ( DEBUG == 1) {
-		std::cout << "DEBUG: " << message << std::endl;
-	}
-}
-
 int getNumber(const std::string &str) {
 	int digits = str[0] - '0';
-	debug("Digits: " + std::to_string(digits));
 	int out = 0;
 	for ( int i = 1; i < digits + 1; i++ ) {
 		out += std::pow(10, digits - i) * (str[i] - '0');
 	}
-	debug("Number: " + std::to_string(out));
 	return out;
 }
 
