@@ -26,8 +26,10 @@ std::string cipher(const std::string &str) {
 	do {
 		maxRange = 'z' - ' ';
 		debug("AHHHHH");
-	} while(maxRange >= 10);
-	// maxRange needs to be one digit long.
+	} while(std::log10(maxRange) > 9);
+	// We can only add one digit to output string.
+	// So the number of digits of maxRange needs to
+	// be only one digit.
 	int num = rand() % maxRange + 1;
 	int digits = std::log10(num) + 1;
 	std::string out = std::to_string(digits) + std::to_string(num);
