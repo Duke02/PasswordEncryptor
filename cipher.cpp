@@ -25,7 +25,6 @@ std::string cipher(const std::string &str) {
 	int maxRange;
 	do {
 		maxRange = 'z' - ' ';
-		debug("AHHHHH");
 	} while(std::log10(maxRange) > 9);
 	// We can only add one digit to output string.
 	// So the number of digits of maxRange needs to
