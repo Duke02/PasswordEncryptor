@@ -4,7 +4,7 @@
 #include <ctime>
 #include <cmath>
 
-#define DEBUG 1
+#define DEBUG 0
 
 void debug(const std::string &message) {
 	if(DEBUG == 1) {
