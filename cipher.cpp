@@ -49,6 +49,7 @@ int main(int argc, char ** argv) {
 		std::cin >> password;
 		cipheredPassword = cipher(password);
 	} else {
+		std::cout << "If you haven't deleted the file before running this, Ctl-C right now and do it!" << std::endl;
 		passwordFile >> password;
 		cipheredPassword = decipher(password);
 	}
