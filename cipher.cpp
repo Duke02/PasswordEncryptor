@@ -2,11 +2,32 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <cmath>
+
+#define DEBUG 1
+
+void debug(const std::string &message) {
+	if ( DEBUG == 1) {
+		std::cout << "DEBUG: " << message << std::endl;
+	}
+}
+
+int getNumber(const std::string &str) {
+	int digits = str[0] - '0';
+	debug("Digits: " + std::to_string(digits));
+	int out = 0;
+	for ( int i = 1; i < digits + 1; i++ ) {
+		out += std::pow(10, digits - i) * (str[i] - '0');
+	}
+	debug("Number: " + std::to_string(out));
+	return out;
+}
 
 std::string cipher(const std::string &str) {
-	int maxRange = 'z' - ' ';
+	int maxRange = 'Z' - 'A';
 	int num = rand() % maxRange + 1;
-	std::string out = std::to_string(num);
+	int digits = std::log10(num) + 1;
+	std::string out = std::to_string(digits) + std::to_string(num);
 	std::string strCopy = str;
 	for ( auto c : strCopy ) {
 		out += c + num;
@@ -15,8 +36,10 @@ std::string cipher(const std::string &str) {
 }
 
 std::string decipher(const std::string& cipheredPassword) {
-	int num = cipheredPassword[0] - '0';
-	std::string strCopy = cipheredPassword.substr(1);
+	int num = getNumber(cipheredPassword);
+	std::string strCopy = cipheredPassword.substr(std::log10(num)+1 + 1);
+	// The first + 1 is for the log10 to get the actual number of digits.
+	// The second + 1 is for the digits in cipheredPassword.
 	std::string out;
 	for ( auto c : strCopy ) {
 		out += c - num;
