@@ -14,7 +14,13 @@ int getNumber(const std::string &str) {
 }
 
 std::string cipher(const std::string &str) {
-	int maxRange = 'Z' - 'A';
+	int maxRange;
+	do {
+		maxRange = 'z' - ' ';
+	} while(std::log10(maxRange) != 0);
+	// Log10 of anything less than 10 is 0,
+	// Which needs to happen because maxRange needs
+	// to be a single digit.
 	int num = rand() % maxRange + 1;
 	int digits = std::log10(num) + 1;
 	std::string out = std::to_string(digits) + std::to_string(num);
