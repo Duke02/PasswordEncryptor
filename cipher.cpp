@@ -4,6 +4,14 @@
 #include <ctime>
 #include <cmath>
 
+#define DEBUG 1
+
+void debug(const std::string &message) {
+	if(DEBUG == 1) {
+		std::cout << "DEBUG: " << message << std::endl;
+	}
+}
+
 int getNumber(const std::string &str) {
 	int digits = str[0] - '0';
 	int out = 0;
@@ -17,6 +25,7 @@ std::string cipher(const std::string &str) {
 	int maxRange;
 	do {
 		maxRange = 'z' - ' ';
+		debug("AHHHHH");
 	} while(maxRange >= 10);
 	// maxRange needs to be one digit long.
 	int num = rand() % maxRange + 1;
