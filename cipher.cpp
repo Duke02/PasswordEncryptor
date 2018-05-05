@@ -5,9 +5,10 @@
 
 std::string cipher(const std::string &str, const bool &toEncrypt) {
 	int num;
+	int maxRange = 10;
 	if(toEncrypt) {
 		do {
-			num = rand() % ('Z' - 'A');
+			num = rand() % maxRange;
 		} while ( num == 0 );
 	}
 	if ( !toEncrypt ) {
