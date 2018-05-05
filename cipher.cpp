@@ -11,7 +11,7 @@ void debugString(const std::string &str) {
 }
 
 std::string cipher(const std::string &str) {
-	int maxRange = 2;
+	int maxRange = 'z' - 'A';
 	int num = rand() % maxRange + 1;
 	std::string out = std::to_string(num);
 	std::string strCopy = str;
