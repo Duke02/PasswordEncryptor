@@ -3,13 +3,6 @@
 #include <string>
 #include <ctime>
 
-void debugString(const std::string &str) {
-	for ( auto c : str ) {
-		std::cout << (int)(c);
-	}
-	std::cout << std::endl;
-}
-
 std::string cipher(const std::string &str) {
 	int maxRange = 'z' - 'A';
 	int num = rand() % maxRange + 1;
