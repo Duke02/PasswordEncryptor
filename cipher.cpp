@@ -4,7 +4,7 @@
 #include <ctime>
 
 std::string cipher(const std::string &str) {
-	int maxRange = 'z' - 'A';
+	int maxRange = 'z' - ' ';
 	int num = rand() % maxRange + 1;
 	std::string out = std::to_string(num);
 	std::string strCopy = str;
