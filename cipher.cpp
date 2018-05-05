@@ -12,6 +12,10 @@ void debug(const std::string &message) {
 	}
 }
 
+int getDigits(const int &num) {
+	return std::log10(num) + 1;
+}
+
 int getNumber(const std::string &str) {
 	int digits = str[0] - '0';
 	int out = 0;
@@ -25,12 +29,12 @@ std::string cipher(const std::string &str) {
 	int maxRange;
 	do {
 		maxRange = 'z' - ' ';
-	} while(std::log10(maxRange) > 9);
+	} while(getDigits(maxRange) > 9);
 	// We can only add one digit to output string.
 	// So the number of digits of maxRange needs to
 	// be only one digit.
 	int num = rand() % maxRange + 1;
-	int digits = std::log10(num) + 1;
+	int digits = getDigits(num);
 	std::string out = std::to_string(digits) + std::to_string(num);
 	std::string strCopy = str;
 	for ( auto c : strCopy ) {
@@ -41,9 +45,8 @@ std::string cipher(const std::string &str) {
 
 std::string decipher(const std::string& cipheredPassword) {
 	int num = getNumber(cipheredPassword);
-	std::string strCopy = cipheredPassword.substr(std::log10(num)+1 + 1);
-	// The first + 1 is for the log10 to get the actual number of digits.
-	// The second + 1 is for the digits in cipheredPassword.
+	std::string strCopy = cipheredPassword.substr(getDigits(num) + 1);
+	// The + 1 is for the digits in cipheredPassword.
 	std::string out;
 	for ( auto c : strCopy ) {
 		out += c - num;
