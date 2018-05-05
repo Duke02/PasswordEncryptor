@@ -26,38 +26,21 @@ std::string cipher(const std::string &str, const bool &toEncrypt) {
 	return out;
 }
 
-bool isTesting(const int &argc) {
-	return argc != 1;
-}
-
 int main(int argc, char ** argv) {
 	srand(time(NULL));
 	std::ifstream passwordFile;
 	std::string application;
-	if(!isTesting(argc)) {
-		std::cout << "Input the application the password is for." << std::endl;
-		std::cin >> application;
-	} else {
-		application = argv[0];
-	}
+	std::cout << "Input the application the password is for." << std::endl;
+	std::cin >> application;
 	passwordFile.open(application + ".txt");
 	char encrypt;
-	if(!isTesting(argc)) {
-		std::cout << "Do you want to encrypt the password in the file? (Y/N)" << std::endl;
-		std::cin >> encrypt;
-		toEncrypt = tolower(encrypt) == 'y';
-	} else {
-		encrypt = argv[1];
-	}
+	std::cout << "Do you want to encrypt the password in the file? (Y/N)" << std::endl;
+	std::cin >> encrypt;
 	bool toEncrypt = tolower(encrypt) == 'y';
 	std::string password;
 	if(toEncrypt) {
-		if(!isTesting(argc)) {
-			std::cout << "Pass in the password for the application." << std::endl;
-			std::cin >> password;
-		} else {
-			password = argv[2];
-		}
+		std::cout << "Pass in the password for the application." << std::endl;
+		std::cin >> password;
 	} else {
 		passwordFile >> password;
 	}
