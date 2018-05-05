@@ -22,7 +22,7 @@ std::string cipher(const std::string &str) {
 }
 
 std::string decipher(const std::string& cipheredPassword) {
-	int num = cipheredPassword[0];
+	int num = cipheredPassword[0] - '0';
 	std::string strCopy = cipheredPassword.substr(1);
 	std::string out;
 	for ( auto c : strCopy ) {
