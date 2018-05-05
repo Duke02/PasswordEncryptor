@@ -21,7 +21,7 @@ std::string cipher(const std::string &str, const bool &toEncrypt) {
 		strCopy = str;
 	}
 	for ( auto c : strCopy ) {
-		out += (c + num) % (128 - ' ') + ' ';
+		out += c + num;
 	}
 	return out;
 }
